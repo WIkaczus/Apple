@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV i Dom - Apple (Polska)</title>
+    <style>
+        /* Base styles same as other pages */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+        }
+
+        /* Navigation styles */
+        .nav-wrapper {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            min-width: 320px;
+            height: 44px;
+        }
+
+        .nav {
+            max-width: 980px;
+            margin: 0 auto;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 22px;
+            font-size: 12px;
+        }
+
+        .nav-items {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex: 1;
+            margin: 0 auto;
+            height: 100%;
+        }
+
+        .nav a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            line-height: 44px;
+            padding: 0 8px;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: #fff;
+        }
+
+        /* TV specific styles */
+        .tv-hero {
+            padding-top: 44px;
+            height: 100vh;
+            background: linear-gradient(180deg, #000 0%, #1a1a1a 100%);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            padding-top: 50px;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 56px;
+            line-height: 1.07143;
+            font-weight: 600;
+            letter-spacing: -0.005em;
+            background: linear-gradient(90deg, #5AC8FA, #AF52DE);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            margin-top: 6px;
+            font-size: 28px;
+            line-height: 1.10722;
+            font-weight: 400;
+            letter-spacing: .004em;
+            color: #86868b;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 800px;
+            margin-top: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .products-section {
+            padding: 100px 0;
+            background: #000;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .product-card {
+            background: #1d1d1f;
+            border-radius: 18px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .product-image {
+            width: 100%;
+            max-width: 200px;
+            margin-bottom: 20px;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+
+        .product-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .product-description {
+            font-size: 17px;
+            color: #86868b;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .product-price {
+            font-size: 17px;
+            color: #2997ff;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            background: #0071e3;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 980px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background: #0077ed;
+            transform: scale(1.05);
+        }
+
+        .features-section {
+            padding: 100px 0;
+            background: #000;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .feature-card {
+            background: #1d1d1f;
+            border-radius: 18px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 21px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .feature-description {
+            font-size: 17px;
+            line-height: 1.47059;
+            color: #86868b;
+        }
+
+        .home-section {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(180deg, #000 0%, #1a1a1a 100%);
+        }
+
+        .home-title {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #5AC8FA, #AF52DE);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .home-description {
+            font-size: 21px;
+            color: #86868b;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav-wrapper">
+        <nav class="nav">
+            <div class="nav-items">
+                <a href="index.html" class="apple-logo">
+                    <svg height="44" viewBox="0 0 14 44" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m13.0729 17.6825a3.61 3.61 0 0 0 -1.7248 3.0365 3.5132 3.5132 0 0 0 2.1379 3.2223 8.394 8.394 0 0 1 -1.0948 2.2618c-.6816.9812-1.3943 1.9623-2.4787 1.9623s-1.3633-.63-2.613-.63c-1.2187 0-1.6525.6507-2.644.6507s-1.6834-.9089-2.4787-2.0243a9.7842 9.7842 0 0 1 -1.6628-5.2776c0-3.0984 2.014-4.7405 3.9969-4.7405 1.0535 0 1.9314.6919 2.5924.6919.63 0 1.6112-.7333 2.8092-.7333a3.7579 3.7579 0 0 1 3.1604 1.5802zm-3.7284-2.8918a3.5615 3.5615 0 0 0 .8469-2.22 1.5353 1.5353 0 0 0 -.031-.32 3.5686 3.5686 0 0 0 -2.3445 1.2084 3.4629 3.4629 0 0 0 -.8779 2.1585 1.419 1.419 0 0 0 .031.2892 1.19 1.19 0 0 0 .2169.0207 3.0935 3.0935 0 0 0 2.1586-1.1368z" fill="#fff"/></svg>
+                </a>
+                <a href="sklep.html">Sklep</a>
+                <a href="mac.html">Mac</a>
+                <a href="ipad.html">iPad</a>
+                <a href="iphone.html">iPhone</a>
+                <a href="watch.html">Watch</a>
+                <a href="airpods.html">AirPods</a>
+                <a href="tv.html">TV i Dom</a>
+                <a href="rozrywka.html">Rozrywka</a>
+                <a href="akcesoria.html">Akcesoria</a>
+                <a href="wsparcie.html">Wsparcie</a>
+                <div class="nav-icons">
+                    <a href="search.html">🔍</a>
+                    <a href="koszyk.html">🛍️</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- TV Hero Section -->
+    <section class="tv-hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Apple TV 4K</h1>
+            <p class="hero-subtitle">Rozrywka na najwyższym poziomie.</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=1200" alt="Apple TV 4K" class="hero-image">
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=400" alt="Apple TV 4K" class="product-image">
+                <h3 class="product-title">Apple TV 4K</h3>
+                <p class="product-description">4K HDR z Dolby Vision i Dolby Atmos</p>
+                <p class="product-price">Od 999 zł</p>
+                <a href="#" class="button">Kup teraz</a>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=400" alt="HomePod mini" class="product-image">
+                <h3 class="product-title">HomePod mini</h3>
+                <p class="product-description">Potężny dźwięk w kompaktowej formie</p>
+                <p class="product-price">Od 449 zł</p>
+                <a href="#" class="button">Kup teraz</a>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=400" alt="HomePod" class="product-image">
+                <h3 class="product-title">HomePod</h3>
+                <p class="product-description">Dźwięk wypełniający przestrzeń</p>
+                <p class="product-price">Od 1299 zł</p>
+                <a href="#" class="button">Kup teraz</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎬</div>
+                <h3 class="feature-title">4K HDR</h3>
+                <p class="feature-description">Niesamowita jakość obrazu</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎮</div>
+                <h3 class="feature-title">Apple Arcade</h3>
+                <p class="feature-description">Setki gier bez reklam</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏠</div>
+                <h3 class="feature-title">HomeKit</h3>
+                <p class="feature-description">Inteligentny dom</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Home Section -->
+    <section class="home-section">
+        <h2 class="home-title">Dom Apple</h2>
+        <p class="home-description">
+            Stwórz inteligentny dom z produktami Apple. Steruj oświetleniem,
+            zabezpieczeniami i innymi urządzeniami za pomocą iPhone'a lub głosu.
+        </p>
+        <a href="#" class="button">Dowiedz się więcej</a>
+    </section>
+</body>
+</html>

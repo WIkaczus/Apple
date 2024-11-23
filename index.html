@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple (Polska)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Navigation styles */
+        .nav-wrapper {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            min-width: 320px;
+            height: 44px;
+        }
+
+        .nav {
+            max-width: 980px;
+            margin: 0 auto;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 22px;
+            font-size: 12px;
+        }
+
+        .nav-items {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex: 1;
+            margin: 0 auto;
+            height: 100%;
+        }
+
+        .nav a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            line-height: 44px;
+            padding: 0 8px;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: #fff;
+        }
+
+        .apple-logo svg {
+            fill: #fff;
+            width: 16px;
+            height: 44px;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .apple-logo:hover svg {
+            opacity: 1;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-icons a {
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-icons a:hover {
+            opacity: 1;
+        }
+
+        /* Promo banner */
+        .promo-banner {
+            background: #fff;
+            color: #1d1d1f;
+            text-align: center;
+            padding: 14px 120px;
+            font-size: 14px;
+            line-height: 1.42859;
+            letter-spacing: -0.016em;
+            margin-top: 44px;
+            font-weight: 400;
+        }
+
+        .promo-banner a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .promo-banner a:hover {
+            text-decoration: underline;
+        }
+
+        /* Product showcase */
+        .product-section {
+            width: 100%;
+            min-height: 820px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #000;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-content {
+            text-align: center;
+            padding-top: 52px;
+            z-index: 2;
+        }
+
+        .product-title {
+            font-size: 56px;
+            line-height: 1.07143;
+            font-weight: 600;
+            letter-spacing: -0.005em;
+            margin-bottom: 6px;
+        }
+
+        .product-subtitle {
+            font-size: 28px;
+            line-height: 1.10722;
+            font-weight: 400;
+            letter-spacing: .004em;
+            color: #86868b;
+            margin-bottom: 12px;
+        }
+
+        .cta-links {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            margin-top: 14px;
+        }
+
+        .cta-link {
+            font-size: 21px;
+            line-height: 1.381;
+            font-weight: 400;
+            letter-spacing: .011em;
+            color: #2997ff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .cta-link:hover {
+            text-decoration: underline;
+        }
+
+        .cta-link::after {
+            content: ">";
+            margin-left: 7px;
+        }
+
+        .product-image-wrapper {
+            width: 100%;
+            height: 600px;
+            position: relative;
+            margin-top: 30px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 12px;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .product-grid-item {
+            height: 580px;
+            background: #fbfbfd;
+            border-radius: 18px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 53px;
+            text-align: center;
+            color: #1d1d1f;
+            position: relative;
+        }
+
+        .grid-item-title {
+            font-size: 40px;
+            line-height: 1.1;
+            font-weight: 600;
+            letter-spacing: 0;
+            margin-bottom: 4px;
+        }
+
+        .grid-item-subtitle {
+            font-size: 21px;
+            line-height: 1.2381;
+            font-weight: 400;
+            letter-spacing: .016em;
+            margin-bottom: 12px;
+        }
+
+        .grid-item-image {
+            width: 100%;
+            height: auto;
+            position: absolute;
+            bottom: 0;
+        }
+
+        /* Dark mode optimization */
+        @media (prefers-color-scheme: dark) {
+            .product-grid-item {
+                background: #1d1d1f;
+                color: #f5f5f7;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media only screen and (max-width: 1068px) {
+            .product-title {
+                font-size: 48px;
+            }
+            .product-subtitle {
+                font-size: 24px;
+            }
+            .grid-item-title {
+                font-size: 32px;
+            }
+            .grid-item-subtitle {
+                font-size: 19px;
+            }
+        }
+
+        @media only screen and (max-width: 734px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            .product-title {
+                font-size: 40px;
+            }
+            .product-subtitle {
+                font-size: 21px;
+            }
+            .promo-banner {
+                padding: 14px 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav-wrapper">
+        <nav class="nav">
+            <div class="nav-items">
+                <a href="#" class="apple-logo">
+                    <svg height="44" viewBox="0 0 14 44" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m13.0729 17.6825a3.61 3.61 0 0 0 -1.7248 3.0365 3.5132 3.5132 0 0 0 2.1379 3.2223 8.394 8.394 0 0 1 -1.0948 2.2618c-.6816.9812-1.3943 1.9623-2.4787 1.9623s-1.3633-.63-2.613-.63c-1.2187 0-1.6525.6507-2.644.6507s-1.6834-.9089-2.4787-2.0243a9.7842 9.7842 0 0 1 -1.6628-5.2776c0-3.0984 2.014-4.7405 3.9969-4.7405 1.0535 0 1.9314.6919 2.5924.6919.63 0 1.6112-.7333 2.8092-.7333a3.7579 3.7579 0 0 1 3.1604 1.5802zm-3.7284-2.8918a3.5615 3.5615 0 0 0 .8469-2.22 1.5353 1.5353 0 0 0 -.031-.32 3.5686 3.5686 0 0 0 -2.3445 1.2084 3.4629 3.4629 0 0 0 -.8779 2.1585 1.419 1.419 0 0 0 .031.2892 1.19 1.19 0 0 0 .2169.0207 3.0935 3.0935 0 0 0 2.1586-1.1368z"/></svg>
+                </a>
+                <a href="#">Sklep</a>
+                <a href="#">Mac</a>
+                <a href="#">iPad</a>
+                <a href="#">iPhone</a>
+                <a href="#">Watch</a>
+                <a href="#">AirPods</a>
+                <a href="#">TV i Dom</a>
+                <a href="#">Rozrywka</a>
+                <a href="#">Akcesoria</a>
+                <a href="#">Wsparcie</a>
+                <div class="nav-icons">
+                    <a href="#">🔍</a>
+                    <a href="#">🛍️</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Promo Banner -->
+    <div class="promo-banner">
+        Kup kwalifikujący się produkt i odbierz kartę upominkową Apple Gift Card
+        o wartości nawet 800 zł – już od 29.11.* <a href="#">Dowiedz się więcej ></a>
+    </div>
+
+    <!-- iPhone 16 Pro Section -->
+    <section class="product-section">
+        <div class="product-content">
+            <h2 class="product-title">iPhone 16 Pro</h2>
+            <p class="product-subtitle">Titanowy. Wytrzymały. Pro.</p>
+            <div class="cta-links">
+                <a href="#" class="cta-link">Dowiedz się więcej</a>
+                <a href="#" class="cta-link">Kup</a>
+            </div>
+        </div>
+        <div class="product-image-wrapper">
+            <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=1400&h=900" 
+                 alt="iPhone 16 Pro" 
+                 class="product-image">
+        </div>
+    </section>
+
+    <!-- Product Grid -->
+    <div class="product-grid">
+        <div class="product-grid-item">
+            <h3 class="grid-item-title">MacBook Pro</h3>
+            <p class="grid-item-subtitle">Superszybki. Supermocny.</p>
+            <div class="cta-links">
+                <a href="#" class="cta-link">Dowiedz się więcej</a>
+                <a href="#" class="cta-link">Kup</a>
+            </div>
+            <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&h=500"
+                 alt="MacBook Pro"
+                 class="grid-item-image">
+        </div>
+        <div class="product-grid-item">
+            <h3 class="grid-item-title">iPad</h3>
+            <p class="grid-item-subtitle">Kreatywność. I punkt.</p>
+            <div class="cta-links">
+                <a href="#" class="cta-link">Dowiedz się więcej</a>
+                <a href="#" class="cta-link">Kup</a>
+            </div>
+            <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800&h=500"
+                 alt="iPad"
+                 class="grid-item-image">
+        </div>
+    </div>
+
+    <script>
+        // Enhanced navigation scroll effect
+        let lastScroll = 0;
+        const nav = document.querySelector('.nav-wrapper');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll <= 0) {
+                nav.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            } else if (currentScroll > lastScroll) {
+                nav.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
+            } else {
+                nav.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
